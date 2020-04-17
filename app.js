@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-const employeeQs = [
+const memberQs = [
     {
         type: "list",
         name: "role",
@@ -52,13 +52,70 @@ const employeeQs = [
         name: "school",
         message: "What school do they attend?",
         when: (answers) => answers.role === "Intern"
+    },
+    {
+        type: "confirm",
+        name: "addMember",
+        message: "Would you like to add another team member?",
+        default: true
     }
 ];
 
-inquirer
-.prompt(employeeQs)
+const makeTeamMember = () => {
+    return inquirer
+        .prompt(memberQs)
+        .then(answers => {
+            if (answers.role === "Manager") {
+                const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+                team.push(newManager);
+                if (answers.addMember === true) {
+                    makeTeamMember();
+                } else {
+                    return console.log(`Your Team: \n${team}`);
+                }
+            }
+            else if (answers.role === "Engineer") {
+                const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+                team.push(newEngineer);
+                if (answers.addMember === true) {
+                    makeTeamMember();
+                } else {
+                    return console.log(`Your Team: \n${team}`);
+                }
+            }
+            else if (answers.role === "Intern") {
+                const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
+                team.push(newIntern);
+                if (answers.addMember === true) {
+                    makeTeamMember();
+                } else {
+                    return console.log(`Your Team: \n${team}`);
+                }
+            }
+            else {
+                console.log("Member's role was not selected");
+            }
+        });
+}
 
-// const team = [];
+const team = [];
+
+makeTeamMember();
+
+// const makeTeamMember = answers => {
+//     if (answers.role === "Manager") {
+//         const newManager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+//         team.push(newManager);
+//     } 
+//     else if (answers.role === "Engineer") {
+//         const newEngineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+//         team.push(newEngineer);
+//     }
+//     else if (answers.role === "Intern") {
+//         const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
+//         team.push(newIntern);
+//     }
+// }
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
