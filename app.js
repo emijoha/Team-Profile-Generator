@@ -71,7 +71,8 @@ const makeTeamMember = () => {
                 if (answers.addMember === true) {
                     makeTeamMember();
                 } else {
-                    return console.log(`Your Team: \n${team}`);
+                    const teamJSON = JSON.stringify(team);
+                    return console.log(`Your Team: \n${teamJSON}`);
                 }
             }
             else if (answers.role === "Engineer") {
@@ -80,7 +81,8 @@ const makeTeamMember = () => {
                 if (answers.addMember === true) {
                     makeTeamMember();
                 } else {
-                    return console.log(`Your Team: \n${team}`);
+                    const teamJSON = JSON.stringify(team);
+                    return console.log(`Your Team: \n${teamJSON}`);
                 }
             }
             else if (answers.role === "Intern") {
@@ -89,11 +91,14 @@ const makeTeamMember = () => {
                 if (answers.addMember === true) {
                     makeTeamMember();
                 } else {
-                    return console.log(`Your Team: \n${team}`);
+                    const teamJSON = JSON.stringify(team);
+                    return console.log(`Your Team: \n${teamJSON}`);
                 }
             }
+            // incase the user is able to skip questions without selecting a role option
             else {
                 console.log("Member's role was not selected");
+                makeTeamMember();
             }
         });
 }
