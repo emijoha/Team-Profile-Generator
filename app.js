@@ -59,7 +59,7 @@ const createEngineer = () => {
             message: "What is their email?"
         },
         {
-            type: "number",
+            type: "input",
             name: "github",
             message: "What is their github username?"
         }
@@ -88,7 +88,7 @@ const createIntern = () => {
             message: "What is their email?"
         },
         {
-            type: "number",
+            type: "input",
             name: "school",
             message: "What school do they attend?"
         }

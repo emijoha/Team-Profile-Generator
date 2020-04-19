@@ -1,0 +1,16 @@
+.team-heading {
+    background-color: rgb(86, 0, 121);
+    color: white;
+    border-radius: 0;
+}
+
+.card {
+    width: 16rem;
+    float: left;
+    margin: 1rem;
+}
+
+.card-header {
+    background-color: rgb(221, 221, 221);
+    border: none;
+}
